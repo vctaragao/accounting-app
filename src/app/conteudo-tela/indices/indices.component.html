@@ -1,0 +1,23 @@
+<div class="index-container">
+    <div class="index">
+        <h1>PCT = {{pct}}</h1>
+        <h1>END = {{end}}</h1>
+        <h1>IPL = {{ipl}}</h1>
+        <div class="ano" *ngIf="ano === 0; else mostrarAno">{{ano === 0 ? 'ano' : ano}}</div>
+        <ng-template #mostrarAno><div class="ano">{{ano}}</div></ng-template>
+    </div>
+    <div class="index">
+        <h1>LG = {{lg}}</h1>
+        <h1>LC = {{lc}}</h1>
+        <h1>LS = {{ls}}</h1>
+        <div class="ano" *ngIf="ano === 0; else mostrarAno">{{ano === 0 ? 'ano' : ano}}</div>
+        <ng-template #mostrarAno><div class="ano">{{ano}}</div></ng-template>
+    </div>
+    <div class="index">
+        <h1>GA = {{ga}}</h1>
+        <h1>ML = {{ml}}</h1>
+        <h1>RA = {{ra}}</h1>
+        <div class="ano" *ngIf="ano === 0; else mostrarAno">{{ano === 0 ? 'ano' : ano}}</div>
+        <ng-template #mostrarAno><div class="ano">{{ano}}</div></ng-template>
+    </div>
+</div>

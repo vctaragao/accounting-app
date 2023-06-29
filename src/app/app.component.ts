@@ -11,6 +11,7 @@ import { CsvProcessor } from './csv-processor';
 export class AppComponent {
   @ViewChild('fileInput') fileInput!: ElementRef;
   selectedFile: File | undefined;
+  inputValue: string= "as";
 
   constructor(private csvProcessor: CsvProcessor) { }
 
