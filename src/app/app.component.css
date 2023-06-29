@@ -1,0 +1,14 @@
+.container-fluid{
+  background-color: lightblue;
+}
+
+.container-center{
+  margin-right: 10%;
+  margin-left: 10%;
+  
+}
+
+
+.navbar-brand{
+    color: white;
+}

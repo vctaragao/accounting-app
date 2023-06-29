@@ -9,7 +9,6 @@ import { DRECsvProcessor } from './dre-csv-processor';
 })
 
 export class AppComponent {
-
   @ViewChild('fileInputBP') fileInputBP!: ElementRef;
   @ViewChild('fileInputDRE') fileInputDRE!: ElementRef;
 
