@@ -3,7 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CsvProcessor } from './csv-processor';
+import { BPCsvProcessor } from './bp-csv-processor';
+import { DRECsvProcessor } from './dre-csv-processor';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,10 @@ import { CsvProcessor } from './csv-processor';
     BrowserModule,
     AppRoutingModule,
   ],
-  providers: [CsvProcessor],
+  providers: [
+    BPCsvProcessor,
+    DRECsvProcessor,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
