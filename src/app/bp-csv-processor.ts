@@ -65,16 +65,16 @@ const bpFieldsToBalance = {
     [BPFields.ParticipacaoNaoControladores]: 'nonControllingInterest',
 };
 
-export class CsvProcessor {
-    processCsvFile(file: File): void {
+export class BPCsvProcessor {
+    processCsvFile(file: File): Balance[] {
         const reader = new FileReader();
+        let balances: Balance[] = []
 
         reader.onload = (event: any) => {
             const csvData = event.target.result;
 
-            let balances: Balance[] = []
             const lines = csvData.split('\n');
-            const headers = lines[0].split(',')
+            const headers = lines[0].split(',') // ['BP', '2021', '2022']
 
             if (headers[0] === 'BP') {
                 for (let i = 1; i < headers.length; i++) {
@@ -89,7 +89,8 @@ export class CsvProcessor {
 
                 for (let j = 1; j < lines.length; j++) {
                     const line = lines[j].match(/("[^"]+"|[^,]+)/g);
-                    const bpField = bpFieldsToBalance[(line[0].trim() as BPFields)] as ObjectKey
+                    const field = (line[0].trim() as BPFields) //'Ativo total', BPField.AtivoTotal
+                    const bpField = bpFieldsToBalance[field] as ObjectKey //'totalAssets'
                     const value = line[i + 1] ? parseFloat(line[i + 1].replace(/"/g, '').replace('.', '').replace(',', '.')) : undefined;
 
                     balances[i][bpField] = value
@@ -103,27 +104,6 @@ export class CsvProcessor {
         };
 
         reader.readAsText(file);
+        return balances
     }
 }
-
-/*
-Ativo Total - (R$)
-Ativo Circulante - (R$)
-Aplicações Financeiras - (R$)
-Caixa e Equivalentes de Caixa - (R$)
-Contas a Receber - (R$)
-Estoque - (R$)
-Ativo Não Circulante - (R$)
-Ativo Realizável a Longo Prazo - (R$)
-Investimentos - (R$)
-Imobilizado - (R$)
-Intangível - (R$)
-Passivo Total - (R$)
-Passivo Circulante - (R$)
-Passivo Não Circulante - (R$)
-Patrimônio Líquido Consolidado - (R$)
-Capital Social Realizado - (R$)
-Reserva Capital - (R$)
-Reserva Lucros - (R$)
-Participação dos Não Controladoresk
-*/

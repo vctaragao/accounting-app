@@ -1,0 +1,45 @@
+h1 {
+  width: 100%;
+  padding: 15px 0;
+  padding-left: 10px; /* Adicione um valor adequado para o espaço à esquerda */
+  
+  text-align: left;
+  font-size: 18px;
+  color: white;
+  background-color: rgb(93, 121, 247);
+}
+
+.index-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.index {
+  position: relative;
+  flex: 1;
+  margin-right: 3%;
+  margin-left: 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ano {
+  font-size: 90%;
+  padding-left: 2%;
+  padding-right: 2%;
+  color: black;
+  position: absolute;
+  font-weight: bold; 
+  top: -5px;
+  background-color: rgb(255, 213, 0);
+  padding: 1%s 1%;
+  font-family: Arial, sans-serif;
+}
+.caixa{
+  border-color: aqua;
+  padding-top: 1%;
+  background-color: rgba(255, 213, 0, 0.3);
+  border-radius: 20px;
+  margin-top: 1%;
+}
