@@ -5,10 +5,22 @@
 .container-center{
   margin-right: 10%;
   margin-left: 10%;
-  
-}
 
+}
 
 .navbar-brand{
     color: white;
+}
+
+.insert-data-text{
+  width: 100%;
+  padding: 15px 0;
+  text-align: center;
+  font-size: 18px;
+  color: white;
+  border-radius: 15px;
+  font-weight: bold;
+  margin-left: 7.5%;
+  margin-right: 7.5%;;
+  background-color: rgb(93, 121, 247);
 }

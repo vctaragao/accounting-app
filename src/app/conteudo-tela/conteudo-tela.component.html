@@ -1,11 +1,4 @@
-<div class="caixa">
-  <app-indices [ano]="2021"></app-indices>
+<div class="caixa" *ngFor="let ano of anos">
+  <app-indices [bpData]="bpData" [dreData]="dreData" [ano]="ano"></app-indices>
 </div>
-<div class="caixa">
-  <app-indices [ano]="2022"></app-indices>
-</div>
-<div class="caixa">
-  <app-indices [ano]="2023"></app-indices>
-</div>
-
-  <!-- coloca o ngIf pra aparecer: coloque os dados, apos colocar o arquuivo e ler, aparece os indices-->
+<!-- coloca o ngIf pra aparecer: coloque os dados, apos colocar o arquuivo e ler, aparece os indices-->

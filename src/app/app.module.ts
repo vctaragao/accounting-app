@@ -17,15 +17,8 @@ import { IndicesComponent } from './conteudo-tela/indices/indices.component';
     ConteudoTelaComponent,
     IndicesComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule
-  ],
-  providers: [
-    BPCsvProcessor,
-    DRECsvProcessor,
-  ],
-  bootstrap: [AppComponent]
+  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  providers: [BPCsvProcessor, DRECsvProcessor],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
