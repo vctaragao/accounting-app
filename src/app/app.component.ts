@@ -43,6 +43,7 @@ export class AppComponent {
       this.appendAlert('Por favor selecione um arquivo para do BP', 'danger');
       return;
     }
+
     if (!this.selectedDREFile) {
       this.appendAlert('Por favor selecione um arquivo para do DRE', 'danger');
       return;

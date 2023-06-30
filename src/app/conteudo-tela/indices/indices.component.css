@@ -1,20 +1,22 @@
-h1 {
+p {
     width: 100%;
     padding: 15px 0;
     padding-left: 10px; /* Adicione um valor adequado para o espaço à esquerda */
-    
+
     text-align: left;
     font-size: 18px;
     color: white;
+    border-radius: 10px;
+    font-weight: 400;
     background-color: rgb(93, 121, 247);
   }
-  
+
   .index-container {
     display: flex;
     justify-content: center;
     align-items: flex-start;
   }
-  
+
   .index {
     position: relative;
     flex: 1;
@@ -30,9 +32,10 @@ h1 {
     padding-right: 2%;
     color: black;
     position: absolute;
-    font-weight: bold; 
+    font-weight: bold;
     top: -7px;
     background-color: rgb(255, 213, 0);
     padding: 1%s 1%;
     font-family: Arial, sans-serif;
+    box-shadow: 2px 3px 2px 0px black;
   }

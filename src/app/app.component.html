@@ -3,68 +3,70 @@
     class="d-flex justify-content-between mx-auto align-items-center"
     style="width: 90%"
   >
-    <h2 *ngIf="!bpData || bpData.length === 0" class="">
-      Por favor, insira os dados para receber os índices!
-    </h2>
-    <a class="navbar-brand">Navbar</a>
-    <form class="d-flex flex-column justify-content-end w-50" role="search">
-      <div class="mb-3 d-flex align-items-baseline justify-content-end">
-        <span class="mb-0 w-25">Upload BP</span>
-        <input
-          type="file"
-          #fileInputBP
-          style="display: none"
-          (change)="handleBPFileInput($event)"
-          accept=".csv"
-        />
-        <button
-          type="button"
-          class="btn btn-outline-primary position-relative"
-          (click)="chooseFileBP()"
-        >
-          Choose File
-          <span
-            *ngIf="selectedBPFile"
-            class="position-absolute top-0 start-100 translate-middle p-2 bg-success border border-light rounded-circle"
-          >
-            <span class="visually-hidden">New alerts</span>
-          </span>
-        </button>
-      </div>
-      <div class="mb-3 d-flex align-items-baseline justify-content-end">
-        <span class="mb-0 w-25">Upload DRE</span>
-        <input
-          type="file"
-          #fileInputDRE
-          style="display: none"
-          (change)="handleDREFileInput($event)"
-          accept=".csv"
-        />
-        <button
-          type="button"
-          class="btn btn-outline-primary position-relative"
-          (click)="chooseFileDRE()"
-        >
-          Choose File
+    <h1>ContabilidadeAPP</h1>
 
-          <span
-            *ngIf="selectedDREFile"
-            class="position-absolute top-0 start-100 translate-middle p-2 bg-success border border-light rounded-circle"
+    <form
+      class="d-flex flex-column w-25 text-center align-items-center"
+      role="search"
+    >
+      <h4>Por favor, insira os dados para receber os índices!</h4>
+      <div class="d-flex justify-content-around w-100">
+        <div class="mb-3 d-flex flex-column">
+          <div>Upload BP</div>
+          <input
+            type="file"
+            #fileInputBP
+            style="display: none"
+            (change)="handleBPFileInput($event)"
+            accept=".csv"
+          />
+          <button
+            type="button"
+            class="btn btn-outline-primary position-relative"
+            (click)="chooseFileBP()"
           >
-            <span class="visually-hidden">New alerts</span>
-          </span>
-        </button>
+            Choose File
+            <span
+              *ngIf="selectedBPFile"
+              class="position-absolute top-0 start-100 translate-middle p-2 bg-success border border-light rounded-circle"
+            >
+              <span class="visually-hidden">New alerts</span>
+            </span>
+          </button>
+        </div>
+        <div class="mb-3 d-flex flex-column">
+          <div>Upload DRE</div>
+          <input
+            type="file"
+            #fileInputDRE
+            style="display: none"
+            (change)="handleDREFileInput($event)"
+            accept=".csv"
+          />
+          <button
+            type="button"
+            class="btn btn-outline-primary position-relative"
+            (click)="chooseFileDRE()"
+          >
+            Choose File
+
+            <span
+              *ngIf="selectedDREFile"
+              class="position-absolute top-0 start-100 translate-middle p-2 bg-success border border-light rounded-circle"
+            >
+              <span class="visually-hidden">New alerts</span>
+            </span>
+          </button>
+        </div>
       </div>
-      <div class="mb-3 d-flex align-items-baseline justify-content-end">
-        <button
-          type="button"
-          class="btn btn-outline-success"
-          (click)="uploadFiles()"
-          [disabled]="!selectedBPFile || !selectedDREFile"
-        >
-          Upload Files
-        </button>
-      </div>
+      <button
+        type="button"
+        class="btn btn-outline-success w-50"
+        (click)="uploadFiles()"
+        [disabled]="!selectedBPFile || !selectedDREFile"
+      >
+        Upload Files
+      </button>
     </form>
   </div>
 </nav>
