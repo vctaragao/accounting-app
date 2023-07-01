@@ -9,6 +9,7 @@ import { DRECsvProcessor } from './dre-csv-processor';
 import { TopoTelaComponent } from './topo-tela/topo-tela.component';
 import { ConteudoTelaComponent } from './conteudo-tela/conteudo-tela.component';
 import { IndicesComponent } from './conteudo-tela/indices/indices.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -17,15 +18,8 @@ import { IndicesComponent } from './conteudo-tela/indices/indices.component';
     ConteudoTelaComponent,
     IndicesComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule
-  ],
-  providers: [
-    BPCsvProcessor,
-    DRECsvProcessor,
-  ],
-  bootstrap: [AppComponent]
+  imports: [BrowserModule, AppRoutingModule, FormsModule, NgbModule],
+  providers: [BPCsvProcessor, DRECsvProcessor],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

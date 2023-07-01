@@ -1,23 +1,176 @@
 <div class="index-container">
-    <div class="index">
-        <h1>PCT = {{pct}}</h1>
-        <h1>END = {{end}}</h1>
-        <h1>IPL = {{ipl}}</h1>
-        <div class="ano" *ngIf="ano === 0; else mostrarAno">{{ano === 0 ? 'ano' : ano}}</div>
-        <ng-template #mostrarAno><div class="ano">{{ano}}</div></ng-template>
+  <div class="index">
+    <p
+      class="position-relative"
+      placement="top"
+      ngbPopover="É a relação do Capital de terceiros com o Capital Próprio da empresa, ou seja a relação da divida da empresa com seu capital próprio"
+      popoverTitle="Participação de Capital de Terceiros"
+    >
+      PCT = {{ pct | number : "1.3-3" }} | {{ pct * 100 | number : "1.2-2" }}%
+      <span
+        *ngIf="pct"
+        [ngClass]="{
+          'bg-danger': pct >= 1,
+          'bg-warning': pct >= 0.5 && pct < 1,
+          'bg-success': pct < 0.5,
+          'position-absolute top-0 start-100 translate-middle p-2 border border-light rounded-circle': true
+        }"
+      >
+        <span class="visually-hidden">New alerts</span>
+      </span>
+    </p>
+    <p
+      placement="top"
+      ngbPopover="É a relação da dívida de Curto Prazo (CP) com a Dívida Total (CP + LP), , ou seja a relação das dívidas de curto prazo da empresa com as dívidas totais"
+      popoverTitle="Composição do Endividamento"
+    >
+      END = {{ end | number : "1.3-3" }} | {{ end * 100 | number : "1.2-2" }}%
+    </p>
+    <p
+      placement="top"
+      ngbPopover="É a relação do Imobilizado com o Patrimônio Líquido da empresa, ou seja, a relação da aplicação em imobilizados da empresa com seu capital próprio"
+      popoverTitle="Imobilização do Patrimonio Líquido"
+    >
+      IPL = {{ ipl | number : "1.3-3" }} | {{ ipl * 100 | number : "1.2-2" }}%
+    </p>
+    <div class="ano" *ngIf="ano === 0; else mostrarAno">
+      {{ ano === 0 ? "ano" : ano }}
     </div>
-    <div class="index">
-        <h1>LG = {{lg}}</h1>
-        <h1>LC = {{lc}}</h1>
-        <h1>LS = {{ls}}</h1>
-        <div class="ano" *ngIf="ano === 0; else mostrarAno">{{ano === 0 ? 'ano' : ano}}</div>
-        <ng-template #mostrarAno><div class="ano">{{ano}}</div></ng-template>
+    <ng-template #mostrarAno>
+      <div class="ano">{{ ano }}</div>
+    </ng-template>
+  </div>
+  <div class="index">
+    <p
+      class="position-relative"
+      placement="top"
+      ngbPopover="É a relação do AC e ARLP com a Dívida Total (CP + LP) da empresa, ou seja, mostram se as obrigações CP e LP da empresa são maiores/menores que o seu ativo circulante e realizável LP"
+      popoverTitle="Liquidez Geral"
+    >
+      LG = {{ lg | number : "1.3-3" }} | {{ lg * 100 | number : "1.2-2" }}%
+      <span
+        *ngIf="lg"
+        [ngClass]="{
+          'bg-success': lg >= 1,
+          'bg-warning': lg >= 0.5 && lg < 1,
+          'bg-danger': lg < 0.5,
+          'position-absolute top-0 start-100 translate-middle p-2 border border-light rounded-circle': true
+        }"
+      >
+        <span class="visually-hidden">New alerts</span>
+      </span>
+    </p>
+    <p
+      class="position-relative"
+      placement="top"
+      ngbPopover="É a relação do AC com as Dívidas de Curto Prazo da empresa, ou seja, mostram se as obrigações CP da empresa são maiores/menores que o seu ativo circulante."
+      popoverTitle="Liquidez Corrente"
+    >
+      LC = {{ lc | number : "1.3-3" }} | {{ lc * 100 | number : "1.2-2" }}%
+      <span
+        *ngIf="lc"
+        [ngClass]="{
+          'bg-success': lc >= 1,
+          'bg-warning': lc >= 0.5 && lc < 1,
+          'bg-danger': lc < 0.5,
+          'position-absolute top-0 start-100 translate-middle p-2 border border-light rounded-circle': true
+        }"
+      >
+        <span class="visually-hidden">New alerts</span>
+      </span>
+    </p>
+    <p
+      class="position-relative"
+      placement="top"
+      ngbPopover="É a relação de parte do AC (disponíveis e contas a receber de clientes) com a Dívida de Curto Prazo da empresa, ou seja, mostram se as obrigações CP da empresa são maiores/menores que o ativo disponível."
+      popoverTitle="Liquidez Seca"
+    >
+      LS = {{ ls | number : "1.3-3" }} | {{ ls * 100 | number : "1.2-2" }}%
+      <span
+        *ngIf="ls"
+        [ngClass]="{
+          'bg-success': ls >= 1,
+          'bg-warning': ls >= 0.5 && ls < 1,
+          'bg-danger': ls < 0.5,
+          'position-absolute top-0 start-100 translate-middle p-2 border border-light rounded-circle': true
+        }"
+      >
+        <span class="visually-hidden">New alerts</span>
+      </span>
+    </p>
+    <div class="ano" *ngIf="ano === 0; else mostrarAno">
+      {{ ano === 0 ? "ano" : ano }}
     </div>
-    <div class="index">
-        <h1>GA = {{ga}}</h1>
-        <h1>ML = {{ml}}</h1>
-        <h1>RA = {{ra}}</h1>
-        <div class="ano" *ngIf="ano === 0; else mostrarAno">{{ano === 0 ? 'ano' : ano}}</div>
-        <ng-template #mostrarAno><div class="ano">{{ano}}</div></ng-template>
+    <ng-template #mostrarAno>
+      <div class="ano">{{ ano }}</div>
+    </ng-template>
+  </div>
+  <div class="index">
+    <p
+      class="position-relative"
+      placement="top"
+      ngbPopover="É a relação das Vendas Líquidas com o Ativo Total, ou seja, o percentual da venda líquida da empresa em relação ao seu valor total investido"
+      popoverTitle="Giro do Ativo"
+    >
+      GA = {{ calculoGA(ano) | number : "1.3-3" }} |
+      {{ calculoGA(ano) | percent : "1.2-2" }}
+      <span
+        *ngIf="ga"
+        [ngClass]="{
+          'bg-success': ga >= 1,
+          'bg-warning': ga >= 0.5 && ls < 1,
+          'bg-danger': ga < 0.5,
+          'position-absolute top-0 start-100 translate-middle p-2 border border-light rounded-circle': true
+        }"
+      >
+        <span class="visually-hidden">New alerts</span>
+      </span>
+    </p>
+    <p
+      class="position-relative"
+      placement="top"
+      ngbPopover="É a relação do Lucro Líquido com as Vendas Líquidas, ou seja, mostram o percentual dos lucros / prejuízos obtido com as vendas da empresa"
+      popoverTitle="Margem Liquida"
+    >
+      ML = {{ calculoML(ano) | number : "1.3-3" }} |
+      {{ calculoML(ano) | percent : "1.2-2" }}
+      <span
+        *ngIf="ml"
+        [ngClass]="{
+          'bg-success': ml >= 1,
+          'bg-warning': ml >= 0.5 && ls < 1,
+          'bg-danger': ml < 0.5,
+          'position-absolute top-0 start-100 translate-middle p-2 border border-light rounded-circle': true
+        }"
+      >
+        <span class="visually-hidden">New alerts</span>
+      </span>
+    </p>
+    <p
+      class="position-relative"
+      placement="top"
+      ngbPopover="É a relação do Lucro Líquido com o Ativo Total, ou seja, o percentual do lucro/prejuízo da empresa em relação ao seu valor total investido."
+      popoverTitle="Rentabilidade do Ativo"
+    >
+      RA = {{ calculoRA(ano) | number : "1.3-3" }} |
+      {{ calculoRA(ano) | percent : "1.2-2" }}
+      <span
+        *ngIf="ra"
+        [ngClass]="{
+          'bg-success': ra >= 1,
+          'bg-warning': ra >= 0.5 && ls < 1,
+          'bg-danger': ra < 0.5,
+          'position-absolute top-0 start-100 translate-middle p-2 border border-light rounded-circle': true
+        }"
+      >
+        <span class="visually-hidden">New alerts</span>
+      </span>
+    </p>
+    <div class="ano" *ngIf="ano === 0; else mostrarAno">
+      {{ ano === 0 ? "ano" : ano }}
     </div>
+    <ng-template #mostrarAno>
+      <div class="ano">{{ ano }}</div>
+    </ng-template>
+  </div>
 </div>

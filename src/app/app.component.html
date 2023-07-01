@@ -1,46 +1,90 @@
 <nav class="navbar bg-body-tertiary">
-  <div class="d-flex justify-content-between mx-auto align-items-center" style="width: 90%">
-    <a class="navbar-brand">Navbar</a>
-    <form class="d-flex flex-column justify-content-end w-50" role="search">
-      <div class="mb-3 d-flex align-items-baseline justify-content-end">
-        <span class="mb-0 w-25">Upload BP</span>
-        <input type="file" #fileInputBP style="display: none" (change)="handleBPFileInput($event)" accept=".csv" />
-        <button type="button" class="btn btn-outline-primary position-relative" (click)="chooseFileBP()">
-          Choose File
+  <div
+    class="d-flex justify-content-between mx-auto align-items-center"
+    style="width: 90%"
+  >
+    <h1>ContabilidadeAPP</h1>
 
-          <span *ngIf="selectedBPFile"
-            class="position-absolute top-0 start-100 translate-middle p-2 bg-success border border-light rounded-circle">
-            <span class="visually-hidden">New alerts</span>
-          </span>
-        </button>
-      </div>
-      <div class="mb-3 d-flex align-items-baseline justify-content-end">
-        <span class="mb-0 w-25">Upload DRE</span>
-        <input type="file" #fileInputDRE style="display: none" (change)="handleDREFileInput($event)" accept=".csv" />
-        <button type="button" class="btn btn-outline-primary position-relative" (click)="chooseFileDRE()">Choose File
+    <form
+      class="d-flex flex-column w-25 text-center align-items-center"
+      role="search"
+    >
+      <h4>Por favor, insira os dados para receber os índices!</h4>
+      <div class="d-flex justify-content-around w-100">
+        <div class="mb-3 d-flex flex-column">
+          <div>Upload BP</div>
+          <input
+            type="file"
+            #fileInputBP
+            style="display: none"
+            (change)="handleBPFileInput($event)"
+            accept=".csv"
+          />
+          <button
+            type="button"
+            class="btn btn-outline-primary position-relative"
+            (click)="chooseFileBP()"
+          >
+            Choose File
+            <span
+              *ngIf="selectedBPFile"
+              class="position-absolute top-0 start-100 translate-middle p-2 bg-success border border-light rounded-circle"
+            >
+              <span class="visually-hidden">New alerts</span>
+            </span>
+          </button>
+        </div>
+        <div class="mb-3 d-flex flex-column">
+          <div>Upload DRE</div>
+          <input
+            type="file"
+            #fileInputDRE
+            style="display: none"
+            (change)="handleDREFileInput($event)"
+            accept=".csv"
+          />
+          <button
+            type="button"
+            class="btn btn-outline-primary position-relative"
+            (click)="chooseFileDRE()"
+          >
+            Choose File
 
-          <span *ngIf="selectedDREFile"
-            class="position-absolute top-0 start-100 translate-middle p-2 bg-success border border-light rounded-circle">
-            <span class="visually-hidden">New alerts</span>
-          </span>
-        </button>
+            <span
+              *ngIf="selectedDREFile"
+              class="position-absolute top-0 start-100 translate-middle p-2 bg-success border border-light rounded-circle"
+            >
+              <span class="visually-hidden">New alerts</span>
+            </span>
+          </button>
+        </div>
       </div>
-      <div class="mb-3 d-flex align-items-baseline justify-content-end">
-        <button type="button" class="btn btn-outline-success" (click)="uploadFiles()"
-          [disabled]="!selectedBPFile || !selectedDREFile">
-          Upload Files
-        </button>
-      </div>
+      <button
+        type="button"
+        class="btn btn-outline-success w-50"
+        (click)="uploadFiles()"
+        [disabled]="!selectedBPFile || !selectedDREFile"
+      >
+        Upload Files
+      </button>
     </form>
   </div>
 </nav>
 <div class="container-center">
   <div class="content-container">
-    <app-topo-tela></app-topo-tela>
-    <app-conteudo-tela></app-conteudo-tela>
+    <app-topo-tela *ngIf="bpData && bpData.length > 0"></app-topo-tela>
+    <app-conteudo-tela
+      [bpData]="bpData"
+      [dreData]="dreData"
+      [anos]="getYearsFromBPData()"
+    ></app-conteudo-tela>
   </div>
 </div>
 <div class="container-fluid">
   <router-outlet></router-outlet>
 </div>
-<div id="liveAlertPlaceholder" class="position-absolute bottom-0 left-0" style="margin-left: 3rem;"></div>
+<div
+  id="liveAlertPlaceholder"
+  class="position-absolute bottom-0 left-0"
+  style="margin-left: 3rem"
+></div>

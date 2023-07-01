@@ -1,24 +1,26 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { BPCsvProcessor } from './bp-csv-processor';
-import { DRECsvProcessor } from './dre-csv-processor';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { BPCsvProcessor, Balance } from './bp-csv-processor';
+import { DRECsvProcessor, DRE } from './dre-csv-processor';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
-
 export class AppComponent {
   @ViewChild('fileInputBP') fileInputBP!: ElementRef;
   @ViewChild('fileInputDRE') fileInputDRE!: ElementRef;
 
-  selectedBPFile: File | undefined;
-  selectedDREFile: File | undefined;
+  selectedBPFile: File | null = null;
+  selectedDREFile: File | null = null;
+  bpData: Balance[] = [];
+  dreData: DRE[] = [];
+  @Input() ano: number = 0;
 
   constructor(
     private bpCsvProcessor: BPCsvProcessor,
     private dreCsvProcessor: DRECsvProcessor
-  ) { }
+  ) {}
 
   chooseFileBP() {
     this.fileInputBP.nativeElement.click();
@@ -29,51 +31,57 @@ export class AppComponent {
   }
 
   handleBPFileInput(event: any) {
-    console.log("form bp")
     this.selectedBPFile = event.target.files[0];
-    console.log(this.selectedBPFile)
   }
 
   handleDREFileInput(event: any) {
-    console.log("form dre")
     this.selectedDREFile = event.target.files[0];
-    console.log(this.selectedDREFile)
   }
 
   uploadFiles() {
     if (!this.selectedBPFile) {
-      alert("Por favor selecione um arquivo para do BP")
+      this.appendAlert('Por favor selecione um arquivo para do BP', 'danger');
       return;
     }
+
     if (!this.selectedDREFile) {
-      alert("Por favor selecione um arquivo para do DRE")
+      this.appendAlert('Por favor selecione um arquivo para do DRE', 'danger');
       return;
     }
 
-    const balances = this.bpCsvProcessor.processCsvFile(this.selectedBPFile);
-    const dres = this.dreCsvProcessor.processCsvFile(this.selectedDREFile);
+    this.bpData = this.bpCsvProcessor.processCsvFile(this.selectedBPFile);
+    this.dreData = this.dreCsvProcessor.processCsvFile(this.selectedDREFile);
 
-    if (balances && dres) {
-      this.appendAlert('CSVs processados com sucesso', 'success')
+    if (this.bpData && this.dreData) {
+      this.appendAlert('CSVs processados com sucesso', 'success');
     } else {
-      this.appendAlert('Houve um erro em processar os CSVs', 'danger')
+      this.appendAlert('Houve um erro em processar os CSVs', 'danger');
     }
   }
 
   appendAlert(message: string, type: string) {
-    console.log("appending")
-    const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+    const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
     if (!alertPlaceholder) {
       return;
     }
-    const wrapper = document.createElement('div')
+
+    const wrapper = document.createElement('div');
     wrapper.innerHTML = [
       `<div class="alert alert-${type} alert-dismissible" role="alert">`,
       `   <div>${message}</div>`,
       '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-      '</div>'
-    ].join('')
+      '</div>',
+    ].join('');
 
-    alertPlaceholder.append(wrapper)
+    alertPlaceholder.append(wrapper);
+  }
+
+  getYearsFromBPData(): number[] {
+    if (!this.bpData) {
+      return [];
+    }
+
+    const years = this.bpData.filter((bp) => bp.year).map((bp) => bp.year);
+    return years as number[];
   }
 }
