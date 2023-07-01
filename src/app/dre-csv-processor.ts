@@ -83,7 +83,7 @@ export class DRECsvProcessor {
       const csvData = event.target.result;
 
       const lines = csvData.split('\n');
-      const headers = lines[0].split(','); // ['BP', '2021', '2022']
+      const headers = lines[0].split(',');
 
       for (let i = 1; i < headers.length; i++) {
         const dre: DRE = { year: parseInt(headers[i]) };

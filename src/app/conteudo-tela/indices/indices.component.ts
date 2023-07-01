@@ -1,13 +1,6 @@
-import {
-  Component,
-  ElementRef,
-  Input,
-  ViewChild,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
-import { BPCsvProcessor, Balance } from '../../bp-csv-processor';
-import { DRECsvProcessor, DRE } from '../../dre-csv-processor';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Balance } from '../../bp-csv-processor';
+import { DRE } from '../../dre-csv-processor';
 
 @Component({
   selector: 'app-indices',
@@ -15,22 +8,13 @@ import { DRECsvProcessor, DRE } from '../../dre-csv-processor';
   styleUrls: ['./indices.component.css'],
 })
 export class IndicesComponent implements OnChanges {
-  @ViewChild('fileInputBP') fileInputBP!: ElementRef;
-  @ViewChild('fileInputDRE') fileInputDRE!: ElementRef;
-
-  selectedBPFile: File | undefined;
-  selectedDREFile: File | undefined;
   @Input() ano: number = 0;
   @Input() bpData: Balance[] | undefined;
   @Input() dreData: DRE[] | undefined;
 
-  constructor(
-    private bpCsvProcessor: BPCsvProcessor,
-    private dreCsvProcessor: DRECsvProcessor
-  ) {}
-
   // índices de estrutura de capital
   pct: number = 0;
+
   end: number = 0;
   ipl: number = 0;
 
@@ -43,6 +27,8 @@ export class IndicesComponent implements OnChanges {
   ga: number = 0;
   ml: number = 0;
   ra: number = 0;
+
+  constructor() {}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.atualizarIndices();
@@ -63,7 +49,6 @@ export class IndicesComponent implements OnChanges {
       this.calculoLC(this.ano);
       this.calculoLS(this.ano);
       if (this.dreData) {
-        console.log('aopa');
         this.calculoGA(this.ano);
       }
     } else {

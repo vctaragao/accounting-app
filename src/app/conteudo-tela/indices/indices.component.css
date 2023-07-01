@@ -9,6 +9,7 @@ p {
     border-radius: 10px;
     font-weight: 400;
     background-color: rgb(93, 121, 247);
+    cursor: pointer;
   }
 
   .index-container {
