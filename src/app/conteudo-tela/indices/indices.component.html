@@ -33,6 +33,28 @@
     >
       IPL = {{ ipl | number : "1.3-3" }} | {{ ipl * 100 | number : "1.2-2" }}%
     </p>
+    <p
+      class="position-relative"
+      placement="top"
+      ngbPopover="avalia o total de dívidas que o negócio possui sobre o valor real que a empresa tem."
+      popoverTitle="Divida Bruta / PL"
+    >
+      DPL = {{ calculoDPL(ano) }} |
+      {{
+        calculoDPL(ano) !== "-" ? (calculoDPL(ano) | percent : "1.2-2") : "-"
+      }}
+      <span
+        *ngIf="dpl !== undefined"
+        [ngClass]="{
+          'bg-danger': dpl >= 1,
+          'bg-warning': dpl >= 0.5 && pct < 1,
+          'bg-success': dpl < 0.5,
+          'position-absolute top-0 start-100 translate-middle p-2 border border-light rounded-circle': true
+        }"
+      >
+        <span class="visually-hidden">New alerts</span>
+      </span>
+    </p>
     <div class="ano" *ngIf="ano === 0; else mostrarAno">
       {{ ano === 0 ? "ano" : ano }}
     </div>
@@ -92,6 +114,26 @@
           'bg-success': ls >= 1,
           'bg-warning': ls >= 0.5 && ls < 1,
           'bg-danger': ls < 0.5,
+          'position-absolute top-0 start-100 translate-middle p-2 border border-light rounded-circle': true
+        }"
+      >
+        <span class="visually-hidden">New alerts</span>
+      </span>
+    </p>
+    <p
+      class="position-relative"
+      placement="top"
+      ngbPopover="mostra quanto a empresa tem disponível no curto prazo. Ele serve para indicar se um negócio consegue arcar com despesas emergenciais"
+      popoverTitle="Liquidez Imediata"
+    >
+      LI = {{ calculoLI(ano) }} |
+      {{ calculoLI(ano) !== "-" ? (calculoLI(ano) | percent : "1.2-2") : "-" }}
+      <span
+        *ngIf="li"
+        [ngClass]="{
+          'bg-success': li >= 1,
+          'bg-warning': li >= 0.5 && ls < 1,
+          'bg-danger': li < 0.5,
           'position-absolute top-0 start-100 translate-middle p-2 border border-light rounded-circle': true
         }"
       >
@@ -160,6 +202,28 @@
           'bg-success': ra >= 1,
           'bg-warning': ra >= 0.5 && ls < 1,
           'bg-danger': ra < 0.5,
+          'position-absolute top-0 start-100 translate-middle p-2 border border-light rounded-circle': true
+        }"
+      >
+        <span class="visually-hidden">New alerts</span>
+      </span>
+    </p>
+    <p
+      class="position-relative"
+      placement="top"
+      ngbPopover="É um demonstrativo de eficiência na aplicação de seus recursos próprios."
+      popoverTitle="Return on Equity"
+    >
+      ROE = {{ calculoRoe(ano) }} |
+      {{
+        calculoRoe(ano) !== "-" ? (calculoRoe(ano) | percent : "1.2-2") : "-"
+      }}
+      <span
+        *ngIf="roe"
+        [ngClass]="{
+          'bg-danger': roe >= 1,
+          'bg-warning': roe >= 0.5 && pct < 1,
+          'bg-success': roe < 0.5,
           'position-absolute top-0 start-100 translate-middle p-2 border border-light rounded-circle': true
         }"
       >

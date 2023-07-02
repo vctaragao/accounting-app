@@ -72,7 +72,7 @@
 </nav>
 <div class="container-center">
   <div class="content-container">
-    <app-topo-tela *ngIf="bpData && bpData.length > 0"></app-topo-tela>
+    <app-topo-tela></app-topo-tela>
     <app-conteudo-tela
       [bpData]="bpData"
       [dreData]="dreData"
@@ -80,11 +80,8 @@
     ></app-conteudo-tela>
   </div>
 </div>
-<div class="container-fluid">
-  <router-outlet></router-outlet>
-</div>
 <div
   id="liveAlertPlaceholder"
-  class="position-absolute bottom-0 left-0"
+  class="position-absolute top-0 left-0"
   style="margin-left: 3rem"
 ></div>
