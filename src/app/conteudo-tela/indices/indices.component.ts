@@ -9,28 +9,33 @@ import { DRE } from '../../dre-csv-processor';
 })
 export class IndicesComponent implements OnChanges {
   @Input() ano: number = 0;
-  @Input() bpData: Balance[] | undefined;
-  @Input() dreData: DRE[] | undefined;
+  @Input() bpData: Balance[] = [];
+  @Input() dreData: DRE[] = [];
 
   // índices de estrutura de capital
   pct: number = 0;
-
   end: number = 0;
   ipl: number = 0;
+  dpl: number = 0;
 
   // índices de liquidez
   lg: number = 0;
   lc: number = 0;
   ls: number = 0;
+  li: number = 0;
 
   // índices de rentabilidade
   ga: number = 0;
   ml: number = 0;
   ra: number = 0;
+  roe: number = 0;
 
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log('componente indice passando por alterações');
+    console.log('app-indice.ts dreData empty', this.dreData.length);
+    console.log('app-indice.ts bpData empty', this.bpData.length);
     this.atualizarIndices();
   }
 
@@ -41,29 +46,26 @@ export class IndicesComponent implements OnChanges {
   }
 
   atualizarIndices(): void {
-    if (this.bpData && this.bpData.length > 0) {
-      this.calculoPCT(this.ano);
-      this.calculoEND(this.ano);
-      this.calculoIPL(this.ano);
-      this.calculoLG(this.ano);
-      this.calculoLC(this.ano);
-      this.calculoLS(this.ano);
-      if (this.dreData) {
-        this.calculoGA(this.ano);
-      }
-    } else {
-      // Define os valores dos índices como zero ou qualquer outro valor padrão
+    if (this.bpData.length === 0) {
       this.pct = 0;
-      // Define os outros índices como zero ou qualquer outro valor padrão
+      return;
     }
+
+    this.calculoPCT(this.ano);
+    this.calculoEND(this.ano);
+    this.calculoIPL(this.ano);
+    this.calculoLG(this.ano);
+    this.calculoLC(this.ano);
+    this.calculoLS(this.ano);
   }
 
   // Função para cálculo do PCT
   calculoPCT(anoDesejado: number) {
-    if (!this.bpData || this.bpData.length === 0) {
+    if (!this.bpData.length) {
       this.pct = 0;
-      return 0; // Valor padrão quando não há dados disponíveis
+      return;
     }
+
     let passivoCirculante = 0;
     let passivoNaoCirculante = 0;
     let patrimonioLiquido = 0;
@@ -173,8 +175,28 @@ export class IndicesComponent implements OnChanges {
     return ((caixaEqCaixa + contasAReceber) / passivoCirculante).toFixed(2); // Valor padrão caso algum dos valores não exista
   }
 
+  calculoLI(anoDesejado: number): string {
+    if (!this.bpData.length) {
+      return '-';
+    }
+
+    const bpDesejado = this.bpData.find((bp) => bp.year === anoDesejado);
+    if (!bpDesejado) {
+      return '-';
+    }
+
+    const caixa = bpDesejado.cashAndEquivalents || 0;
+    const passivoCirculante = bpDesejado.currentLiabilities || 0;
+    if (!passivoCirculante) {
+      return '-';
+    }
+
+    this.li = caixa / passivoCirculante;
+    return this.li.toPrecision(4);
+  }
+
   calculoGA(anoDesejado: number) {
-    if (!this.bpData || this.bpData.length === 0 || !this.dreData) {
+    if (!this.bpData.length || !this.dreData.length) {
       this.ga = 0;
       return 0; // Valor padrão quando não há dados disponíveis
     }
@@ -188,6 +210,56 @@ export class IndicesComponent implements OnChanges {
     }
     this.ga = vendasLiquidas / ativoTotal;
     return vendasLiquidas / ativoTotal; // Valor padrão caso algum dos valores não exista
+  }
+
+  calculoRoe(anoDesejado: number): string {
+    if (!this.bpData.length || !this.dreData.length) {
+      return '-';
+    }
+
+    const bpDesejado = this.bpData.find((bp) => bp.year === anoDesejado);
+    const dreDesejado = this.dreData.find((dre) => dre.year === anoDesejado);
+    if (!bpDesejado || !dreDesejado) {
+      return '-';
+    }
+
+    if (
+      bpDesejado.consolidatedShareholdersEquity === undefined ||
+      dreDesejado.netIncome === undefined
+    ) {
+      return '-';
+    }
+
+    const netWorth = bpDesejado.consolidatedShareholdersEquity || 0;
+    const netIncome = dreDesejado.netIncome || 0;
+
+    this.roe = netIncome / netWorth;
+    return this.roe.toPrecision(3);
+  }
+
+  calculoDPL(anoDesejado: number): string {
+    if (!this.bpData.length || !this.dreData.length) {
+      return '-';
+    }
+
+    const bpDesejado = this.bpData.find((bp) => bp.year === anoDesejado);
+    const dreDesejado = this.dreData.find((dre) => dre.year === anoDesejado);
+    if (!bpDesejado || !dreDesejado) {
+      return '-';
+    }
+
+    if (
+      bpDesejado.consolidatedShareholdersEquity === undefined ||
+      dreDesejado.totalDebt === undefined
+    ) {
+      return '-';
+    }
+
+    const netWorth = bpDesejado.consolidatedShareholdersEquity || 0;
+    const totalDebt = dreDesejado.totalDebt || 0;
+
+    this.dpl = totalDebt / netWorth;
+    return this.dpl.toPrecision(3);
   }
 
   calculoML(anoDesejado: number) {

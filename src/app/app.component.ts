@@ -15,7 +15,6 @@ export class AppComponent {
   selectedDREFile: File | null = null;
   bpData: Balance[] = [];
   dreData: DRE[] = [];
-  @Input() ano: number = 0;
 
   constructor(
     private bpCsvProcessor: BPCsvProcessor,
@@ -52,11 +51,7 @@ export class AppComponent {
     this.bpData = this.bpCsvProcessor.processCsvFile(this.selectedBPFile);
     this.dreData = this.dreCsvProcessor.processCsvFile(this.selectedDREFile);
 
-    if (this.bpData && this.dreData) {
-      this.appendAlert('CSVs processados com sucesso', 'success');
-    } else {
-      this.appendAlert('Houve um erro em processar os CSVs', 'danger');
-    }
+    this.appendAlert('CSVs processados com sucesso', 'success');
   }
 
   appendAlert(message: string, type: string) {
