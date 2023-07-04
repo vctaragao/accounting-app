@@ -1,20 +1,20 @@
-DRE,2022,2021,2020,2019
-Receita Líquida,"205,91327",,,
-Custos,"-131,31125",,,
-Lucro Bruto,"74,60202",,,
-Despesas/Receitas Operacionais,"-50,39207",,,
-EBITDA,0,,,
-Amortização/Depreciação,0,,,
-EBIT,"24,20995",,,
-Resultado não operacional,0,,,
-Resultado Financeiro,0,,,
-Impostos,"-2,99275",,,
-Lucro Líquido,"21,2172",,,
-Lucro atribuído a Controladora,"21,2172",,,
-Lucro atribuído a Não Controladores,0,,,
-CAPEX,0,,,
-Dívida Bruta,0,,,
-Dívida Líquida,0,,,
+DRE,2022,2021
+Receita Líquida,"205,91327","125,44343"
+Custos,"-131,31125","-55,12132"
+Lucro Bruto,"74,60202","70,32211"
+Despesas/Receitas Operacionais,"-50,39207","-37.469,74"
+EBITDA,0,
+Amortização/Depreciação,0,
+EBIT,"24,20995","32,85237"
+Resultado não operacional,0,
+Resultado Financeiro,0,
+Impostos,"-2,99275","-9,47156"
+Lucro Líquido,"21,2172","23,38080"
+Lucro atribuído a Controladora,"21,2172","23,38080"
+Lucro atribuído a Não Controladores,0,
+CAPEX,,
+Dívida Bruta,,
+Dívida Líquida,,
 ROE,0,,,
 ROIC,0,,,
 Margem Bruta,"-6,98",,,
